@@ -10,27 +10,27 @@ public class PurchasingManager : MonoBehaviour
         {
             case 1:
                 IAPManager.OnPurchaseSuccess = () =>
-                    DirGameDataManager.Ins.playerData.AddDiamond(1);
+                    DirGameDataManager.Ins.playerData.AddHelp(1);
                 IAPManager.Ins.BuyProductID(Key.PACK1);
                 break;
             case 2:
                 IAPManager.OnPurchaseSuccess = () =>
-                    DirGameDataManager.Ins.playerData.AddDiamond(2);
+                    DirGameDataManager.Ins.playerData.AddHelp(2);
                 IAPManager.Ins.BuyProductID(Key.PACK2);
                 break;
             case 3:
                 IAPManager.OnPurchaseSuccess = () =>
-                    DirGameDataManager.Ins.playerData.AddDiamond(5);
+                    DirGameDataManager.Ins.playerData.AddHelp(5);
                 IAPManager.Ins.BuyProductID(Key.PACK3);
                 break;
             case 4:
                 IAPManager.OnPurchaseSuccess = () =>
-                    DirGameDataManager.Ins.playerData.AddDiamond(10);
+                    DirGameDataManager.Ins.playerData.AddHelp(10);
                 IAPManager.Ins.BuyProductID(Key.PACK4);
                 break;
             case 5:
                 IAPManager.OnPurchaseSuccess = () =>
-                    DirGameDataManager.Ins.playerData.AddDiamond(20);
+                    DirGameDataManager.Ins.playerData.AddHelp(20);
                 IAPManager.Ins.BuyProductID(Key.PACK5);
                 break;
         }

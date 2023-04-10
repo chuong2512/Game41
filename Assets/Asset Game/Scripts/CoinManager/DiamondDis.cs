@@ -11,19 +11,17 @@ public class DiamondDis : MonoBehaviour
    {
       diamondTmp = GetComponent<TextMeshProUGUI>();
    }
-
-   
    
    
    void Start()
       {
          DirGameDataManager.Ins.playerData.onChangeDiamond += i => OnChangeHelp(i);
-         diamondTmp.text = $"{DirGameDataManager.Ins.playerData.intHelp} Help";
+         diamondTmp.text = $"{DirGameDataManager.Ins.playerData.intHelp}";
       }
 
    private void OnChangeHelp(int i)
    {
-      diamondTmp.text = $"{i} Help";
+      diamondTmp.text = $"{i}";
    }
    
    void OnDestroy()

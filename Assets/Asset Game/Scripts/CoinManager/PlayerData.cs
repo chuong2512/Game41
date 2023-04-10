@@ -16,6 +16,7 @@ public class PlayerData : BaseData
     public bool[] listSkins;
 
     public Action<int> onChangeDiamond;
+    public int point;
 
     public override void Init()
     {
@@ -41,6 +42,7 @@ public class PlayerData : BaseData
 
     public override void ResetData()
     {
+        point = 0;
         intHelp = 0;
         intLevel = 0;
         currentSkin = 0;
@@ -51,6 +53,16 @@ public class PlayerData : BaseData
             listSkins[i] = true;
         }
 
+        Save();
+    }
+
+    public void SetPoint(int pointt)
+    {
+        if (pointt >= point)
+        {
+            point = pointt;
+        }
+        
         Save();
     }
 
@@ -73,7 +85,7 @@ public class PlayerData : BaseData
 
     
 
-    public void AddDiamond(int a)
+    public void AddHelp(int a)
     {
         intHelp += a;
 

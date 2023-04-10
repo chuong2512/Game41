@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using JumpFrog;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -15,9 +16,15 @@ public enum State
 
 public class GameManager : Singleton<GameManager>
 {
-    public GameObject winUI;
-
     public State currentState = State.Start;
+
+    public GameObject loseObj;
+
+    public TextMeshProUGUI point, highPoint;
+
+    public GameObject tap;
+    
+    public GameObject[] respawns;
 
     public void SetState(State state)
     {
@@ -40,20 +47,16 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && currentState != State.Playing)
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
-            if (hit.collider)
-            {
-                Debug.Log($"{hit.collider.transform.gameObject.name}"); 
-            }
+            SetState(State.Playing);
+            tap.SetActive(false);
+            PlayerController.Instance.Play();
         }
     }
 
     private bool CheckWin()
     {
-
         return true;
     }
 
@@ -61,10 +64,47 @@ public class GameManager : Singleton<GameManager>
     {
     }
 
-    
 
     public void Help()
     {
-       
+    }
+
+    public void ShowLose()
+    {
+        loseObj.SetActive(true);
+
+        SetState(State.Lose);
+
+        point.SetText($"Score : {TheLevelTMP.Instance.point}");
+
+        DirGameDataManager.Ins.playerData.SetPoint(TheLevelTMP.Instance.point);
+
+        highPoint.SetText($"High Score : {DirGameDataManager.Ins.playerData.point}");
+    }
+
+    public void ReStart()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    public void Continue()
+    {
+        if (DirGameDataManager.Ins.playerData.intHelp >= 10)
+        {
+            DirGameDataManager.Ins.playerData.SubHelp(10);
+            loseObj.SetActive(false);
+
+            respawns = GameObject.FindGameObjectsWithTag("Enemy");
+
+            if (respawns != null)
+            {
+                foreach (GameObject respawn in respawns)
+                {
+                    Destroy(respawn);
+                }
+            }
+
+            SetState(State.Playing);
+        }
     }
 }

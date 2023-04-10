@@ -8,8 +8,6 @@ public class DirGameDataManager : PersistentSingleton<DirGameDataManager>
 
     /*----Data variable-------------------------------------------------------------------------------------------------*/
     [HideInInspector] public PlayerData playerData;
-
-    public Sprite[] anh;
     
     private void Start()
     {
